@@ -1,12 +1,12 @@
 import { Head, Link, usePage } from '@inertiajs/react';
+import Index  from '@/pages/locals';
 import { dashboard, login, register } from '@/routes';
-
 export default function Welcome({
     canRegister = true,
 }: {
     canRegister?: boolean;
 }) {
-    const { auth, locals } = usePage().props;
+    const { auth } = usePage().props;
 
     return (
         <>
@@ -48,7 +48,9 @@ export default function Welcome({
                     </nav>
                 </header>
                 <div className="flex w-full items-center justify-center opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
-                    <main>{locals[0]}</main>
+                    <main>
+                        {Index}
+                    </main>
                 </div>
                 <div className="hidden h-14.5 lg:block"></div>
             </div>

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('locals', function (Blueprint $table) {
             $table->id()->autoIncrement()->unique();
+            $table->timestamps();
             $table->string('name');
             $table->string('city');
             $table->string('direction');

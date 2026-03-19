@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Local;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
 class LocalController extends Controller
 {
@@ -13,9 +14,8 @@ class LocalController extends Controller
      */
     public function index()
     {
-        //
-        $locals = DB::table('locals')->get();
-        return view('/welcome', ['locals' => $locals]);
+        $locals = Local::latest()->get();
+       return Inertia::render('locals/index',['locals'=>$locals]);
     }
 
     /**
@@ -23,7 +23,7 @@ class LocalController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('locals/local-form');
     }
 
     /**
