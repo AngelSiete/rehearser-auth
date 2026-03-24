@@ -6,20 +6,32 @@ type LocalType = {
     id: number;
     name: string;
     description: string;
-    hourlyRate: number;
+    hourlyRate?: number;
+    city: string;
+    direction: string;
+    musicianCapacity: number;
+    hasEquipment: boolean;
 };
 export default function Index({ locals }: { locals: LocalType[] }) {
 
     return (
-        <div className="locals-index">
+        <div className="locals-index grid grid-cols-1 gap-6 md:grid-cols-3">
             {locals.map((local: LocalType) => (
-                <Link key={local.id} href={`/local/${local.id}`}>
+                <Link
+                    key={local.id}
+                    href={`/local/${local.id}`}
+                    className="rounded-lg p-4 shadow"
+                >
                     <Local
                         local={{
                             id: local.id,
                             name: local.name,
                             description: local.description,
                             hourlyRate: local.hourlyRate,
+                            city: local.city,
+                            direction: local.direction,
+                            musicianCapacity: local.musicianCapacity,
+                            hasEquipment: local.hasEquipment,
                         }}
                     />
                 </Link>
