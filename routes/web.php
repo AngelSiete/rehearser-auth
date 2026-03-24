@@ -11,6 +11,8 @@ Route::inertia('/', 'welcome', [
 
 Route::resource('locals', LocalController::class);
 
+Route::get('/local/{local}', [LocalController::class, 'show']);
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'dashboard')->name('dashboard');
 

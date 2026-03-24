@@ -15,7 +15,7 @@ class LocalController extends Controller
     public function index()
     {
         $locals = Local::latest()->get();
-       return Inertia::render('locals/index',['locals'=>$locals]);
+        return Inertia::render('locals/index',['locals'=>$locals]);
     }
 
     /**
@@ -39,7 +39,7 @@ class LocalController extends Controller
      */
     public function show(Local $local)
     {
-        //
+        return Inertia::render('locals/local',['local'=>$local]);
     }
 
     /**
