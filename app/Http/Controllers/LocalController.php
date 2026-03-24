@@ -31,7 +31,19 @@ class LocalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'hourlyRate' => 'required|numeric|min:0',
+            'city' => 'nullable|string|max:255',
+            'direction' => 'nullable|string|max:255',
+            'musicianCapacity' => 'nullable|integer|min:0',
+            'hasEquipment' => 'nullable|boolean',
+        ]);
+
+        Local::create($validated);
+
+        return redirect()->route('locals.index');
     }
 
     /**

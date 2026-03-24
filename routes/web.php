@@ -12,10 +12,11 @@ Route::inertia('/', 'welcome', [
 Route::resource('locals', LocalController::class);
 
 Route::get('/local/{local}', [LocalController::class, 'show']);
+Route::get('/locals/create', [LocalController::class, 'create'])->name('locals.create');
+Route::post('/locals', [LocalController::class, 'store'])->name('locals.store');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'dashboard')->name('dashboard');
-
 });
 
 require __DIR__.'/settings.php';
