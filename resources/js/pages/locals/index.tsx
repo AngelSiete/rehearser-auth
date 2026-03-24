@@ -12,9 +12,16 @@ export default function Index({ locals }: { locals: LocalType[] }) {
 
     return (
         <div>
-            {locals.map((local) => (
+            {locals.map((local: LocalType) => (
                 <Link key={local.id} href={`/local/${local.id}`}>
-                    <Local {...local} />
+                    <Local
+                        local={{
+                            id: local.id,
+                            name: local.name,
+                            description: local.description,
+                            hourlyRate: local.hourlyRate,
+                        }}
+                    />
                 </Link>
             ))}
         </div>
