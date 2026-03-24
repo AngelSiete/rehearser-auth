@@ -59,7 +59,7 @@ class LocalController extends Controller
      */
     public function edit(Local $local)
     {
-        //
+        return Inertia::render('locals/local-form-edit', ['local'=>$local]);
     }
 
     /**
@@ -67,7 +67,29 @@ class LocalController extends Controller
      */
     public function update(Request $request, Local $local)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'hourlyRate' => 'required|numeric|min:0',
+
+            'city' => 'nullable|string|max:255',
+            'direction' => 'nullable|string|max:255',
+            'musicianCapacity' => 'nullable|integer|min:0',
+            'hasEquipment' => 'nullable|boolean',
+        ]);
+
+        $local->update([
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+            'hourly_rate' => $validated['hourlyRate'],
+
+            'city' => $validated['city'] ?? null,
+            'direction' => $validated['direction'] ?? null,
+            'musician_capacity' => $validated['musicianCapacity'] ?? null,
+            'has_equipment' => $validated['hasEquipment'] ?? false,
+        ]);
+
+        return redirect()->route('locals.index');
     }
 
     /**
