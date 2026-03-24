@@ -6,7 +6,7 @@ type LocalType = {
 };
 export default function Local({ local } : {local: LocalType}) {
     return (
-        <div>
+        <div className="local">
             <h2>{local.name}</h2>
             <p>{local.description}</p>
             <span>{local.hourlyRate}€/h</span>

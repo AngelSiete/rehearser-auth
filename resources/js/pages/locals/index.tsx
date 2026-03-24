@@ -11,7 +11,7 @@ type LocalType = {
 export default function Index({ locals }: { locals: LocalType[] }) {
 
     return (
-        <div>
+        <div className="locals-index">
             {locals.map((local: LocalType) => (
                 <Link key={local.id} href={`/local/${local.id}`}>
                     <Local
