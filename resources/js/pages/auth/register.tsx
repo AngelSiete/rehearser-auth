@@ -69,7 +69,7 @@ export default function Register() {
 
                             <div className="grid gap-2">
                                 <Label htmlFor="userType">Soy:</Label>
-                                <Select name="userType">
+                                <Select name="userType" required={true}>
                                     <SelectTrigger className="w-[200px]">
                                         <SelectValue placeholder="Tipo de usuario" />
                                     </SelectTrigger>
