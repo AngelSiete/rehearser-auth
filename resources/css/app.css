@@ -132,7 +132,10 @@
     --sidebar-border: oklch(0.269 0 0);
     --sidebar-ring: oklch(0.439 0 0);
 }
-
+.rehearser-title{
+    color: #cb2624;
+    font-weight: bolder;
+}
 @layer base {
     * {
         @apply border-border;

@@ -22,7 +22,7 @@ export default function MainLayout({
                             </Link>
                             <Link
                                 href="/"
-                                className="inline-block px-5 py-1.5 text-xl leading-normal text-[#1b1b18] hover:border-[#19140035] hover:text-2xl hover:text-red-400 dark:text-[#EDEDEC] dark:hover:text-red-400"
+                                className="rehearser-title inline-block px-5 py-1.5 text-xl leading-normal text-[#1b1b18] hover:border-[#19140035] hover:text-2xl dark:text-[#EDEDEC]"
                             >
                                 Rehearser
                             </Link>
@@ -37,7 +37,7 @@ export default function MainLayout({
                             </Link>
                             <Link
                                 href="/"
-                                className="inline-block px-5 py-1.5 text-xl leading-normal text-[#1b1b18] hover:border-[#19140035] hover:text-2xl hover:text-red-400 dark:text-[#EDEDEC] dark:hover:text-red-400"
+                                className="rehearser-title inline-block px-5 py-1.5 text-xl leading-normal text-[#1b1b18] hover:border-[#19140035] hover:text-2xl dark:text-[#EDEDEC]"
                             >
                                 Rehearser
                             </Link>

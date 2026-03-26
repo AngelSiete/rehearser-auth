@@ -72,7 +72,7 @@ export default function Local({ local } : {local: LocalType}) {
                 </span>
             </div>
             {(isOwner && isLocalPage) && (
-                <Link href={`/locals/${local.id}/edit`} className="btn-edit">
+                <Link href={`/locals/${local.id}/edit`} className="btn-edit dark:text-white">
                     Edit
                 </Link>
             )}
