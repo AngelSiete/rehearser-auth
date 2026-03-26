@@ -1,5 +1,5 @@
-import Index from '@/pages/locals';
 import { Head, Link, usePage } from '@inertiajs/react';
+import Index from '@/pages/locals';
 import { dashboard, login, register } from '@/routes';
 type LocalType = {
     id: number;
@@ -19,7 +19,7 @@ export default function Welcome({
     locals: LocalType[];
 }) {
     const { auth } = usePage().props;
-    console.log({ locals });
+
     return (
         <>
             <Head title="Welcome">
