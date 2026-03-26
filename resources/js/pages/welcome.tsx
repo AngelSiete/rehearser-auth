@@ -1,8 +1,9 @@
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import Index from '@/pages/locals';
 
 type LocalType = {
     id: number;
+    user_id: number;
     name: string;
     description: string;
     hourlyRate?: number;
@@ -36,9 +37,9 @@ export default function Welcome({
                         <Index locals={locals}/>
                         <Link
                             href="/locals"
-                            className="rounded-sm border border-transparent px-5 py-1.5 text-xl leading-normal text-[#1b1b18] hover:border-[#19140035] dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A] m-auto flex justify-center"
+                            className="mt-6 rounded-sm border border-transparent px-5 py-1.5 text-xl leading-normal text-[#1b1b18] hover:border-[#19140035] dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A] m-auto flex justify-center"
                         >
-                           Ve todos nuestros locales
+                           Busca entre todos nuestros locales
                         </Link>
                     </main>
                 </div>
