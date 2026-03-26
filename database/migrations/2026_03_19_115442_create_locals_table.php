@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id()->autoIncrement()->unique();
             $table->timestamps();
             $table->string('name');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('city');
             $table->string('direction');
             $table->integer('musicianCapacity');

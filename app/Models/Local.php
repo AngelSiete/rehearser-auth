@@ -9,4 +9,19 @@ class Local extends Model
 {
     use HasFactory;
     protected $fillable = ['name','city','direction','musicianCapacity','hasEquipment','description','hourlyRate'];
+    protected static function booted()
+    {
+        static::creating(function ($local) {
+            // Automatically set user_id to logged-in user
+            if (auth()->check()) {
+                $local->user_id = auth()->id();
+            }
+        });
+    }
+
+    // Relationship
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
