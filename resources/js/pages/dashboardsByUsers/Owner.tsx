@@ -1,6 +1,9 @@
+import { usePage } from '@inertiajs/react';
 import { Link, router } from '@inertiajs/react';
 import { useMobileNavigation } from '@/hooks/use-mobile-navigation';
+import Index from '@/pages/locals';
 import { logout } from '@/routes';
+
 type OwnerDashboardProps = {
     auth: {
         user: {
@@ -8,6 +11,17 @@ type OwnerDashboardProps = {
             email: string;
         };
     };
+};
+type LocalType = {
+    id: number;
+    user_id: number;
+    name: string;
+    description: string;
+    hourlyRate?: number;
+    city: string;
+    direction: string;
+    musicianCapacity: number;
+    hasEquipment: boolean;
 };
 
 const OwnerDashboard: React.FC<OwnerDashboardProps> = ({ auth }) => {
@@ -17,14 +31,18 @@ const OwnerDashboard: React.FC<OwnerDashboardProps> = ({ auth }) => {
         cleanup();
         router.flushAll();
     };
+    const { locals } = usePage<{ locals: LocalType[] }>().props;
 
     return (
         <div className="p-6">
-            <h1 className="mb-4 text-2xl font-bold">Panel de Usuario - Propietario</h1>
+            <h1 className="mb-4 text-2xl font-bold">
+                Panel de Usuario - Propietario
+            </h1>
             <p className="mb-4">
                 Sé bienvenido, {auth.user.name}! propietario.
             </p>
             <div className="space-y-2"></div>
+            <Index locals={locals} />
             <Link
                 className="block w-full cursor-pointer"
                 href={logout()}

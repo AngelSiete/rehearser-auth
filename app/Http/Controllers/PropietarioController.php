@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Propietario;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use App\Models\Local;
 
 class PropietarioController extends Controller
 {
@@ -15,6 +17,15 @@ class PropietarioController extends Controller
         //
     }
 
+    public function dashboard()
+    {
+        $locals = Local::where('user_id', auth()->id())
+            ->latest()->get();
+
+        return Inertia::render('dashboardsByUsers/Owner', [
+            'locals' => $locals,
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      */

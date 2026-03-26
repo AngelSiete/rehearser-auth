@@ -4,6 +4,7 @@ use App\Models\Local;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
+use App\Http\Controllers\PropietarioController;
 
 Route::inertia('/', 'welcome', [
     'locals' => Local::latest()->take(6)->get(),
@@ -23,8 +24,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         };
     })->name('dashboard');
 });
-Route::middleware(['auth', 'verified', 'owner'])->group(function () {
+/*Route::middleware(['auth', 'verified', 'owner'])->group(function () {
     Route::inertia('owner/dashboard', 'dashboardsByUsers/Owner')->name('owner.dashboard');
+});*/
+Route::middleware(['auth', 'verified', 'owner'])->group(function () {
+    Route::get('owner/dashboard', [PropietarioController::class, 'dashboard'])
+        ->name('owner.dashboard');
 });
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('user/dashboard', 'dashboardsByUsers/User')->name('user.dashboard');
