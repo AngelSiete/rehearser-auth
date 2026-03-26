@@ -1,5 +1,8 @@
+import { Link, usePage } from '@inertiajs/react';
+
 type LocalType = {
     id: number;
+    user_id: number;
     name: string;
     description?: string;
     hourlyRate?: number;
@@ -9,6 +12,9 @@ type LocalType = {
     hasEquipment:boolean;
 };
 export default function Local({ local } : {local: LocalType}) {
+    const { auth } = usePage().props;
+    const isOwner = auth.user.id === local.user_id;
+
     return (
         <div className="local mx-auto w-full max-w-md rounded-2xl border border-gray-100 bg-white p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl dark:border-gray-800 dark:bg-gray-900">
             {/* Title */}
@@ -17,7 +23,7 @@ export default function Local({ local } : {local: LocalType}) {
             </h2>
 
             {/* Description */}
-            <p className="mb-4 text-sm text-gray-600 dark:text-gray-300 descript">
+            <p className="descript mb-4 text-sm text-gray-600 dark:text-gray-300">
                 {local.description}
             </p>
 
@@ -37,7 +43,7 @@ export default function Local({ local } : {local: LocalType}) {
                     </span>
                 </div>
 
-                <div className="flex flex-col direction">
+                <div className="direction flex flex-col">
                     <span className="text-gray-400">Direction</span>
                     <span className="font-semibold text-gray-800 dark:text-white">
                         {local.direction || '—'}
@@ -64,6 +70,7 @@ export default function Local({ local } : {local: LocalType}) {
                     {local.hasEquipment ? 'Has Equipment' : 'No Equipment'}
                 </span>
             </div>
+            {isOwner && <Link href={`/locals/${local.id}/edit`} className="btn-edit">Edit</Link>}
         </div>
     );
 };

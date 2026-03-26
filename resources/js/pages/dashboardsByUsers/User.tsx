@@ -2,7 +2,7 @@ import { Link, router } from '@inertiajs/react';
 import { LogOut } from 'lucide-react';
 import { useMobileNavigation } from '@/hooks/use-mobile-navigation';
 import { logout } from '@/routes';
-type OwnerDashboardProps = {
+type UserDashboardProps = {
     auth: {
         user: {
             name: string;
@@ -11,7 +11,7 @@ type OwnerDashboardProps = {
     };
 };
 
-const OwnerDashboard: React.FC<OwnerDashboardProps> = ({ auth }) => {
+const UserDashboard: React.FC<UserDashboardProps> = ({ auth }) => {
     const cleanup = useMobileNavigation();
 
     const handleLogout = () => {
@@ -21,7 +21,7 @@ const OwnerDashboard: React.FC<OwnerDashboardProps> = ({ auth }) => {
 
     return (
         <div className="p-6">
-            <h1 className="mb-4 text-2xl font-bold">Owner Dashboard</h1>
+            <h1 className="mb-4 text-2xl font-bold">User Dashboard</h1>
             <p className="mb-4">
                 Welcome, {auth.user.name}! You are logged in as an owner.
             </p>
@@ -40,4 +40,4 @@ const OwnerDashboard: React.FC<OwnerDashboardProps> = ({ auth }) => {
     );
 };
 
-export default OwnerDashboard;
+export default UserDashboard;

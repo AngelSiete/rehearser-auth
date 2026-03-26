@@ -4,6 +4,7 @@ import Local from './local';
 
 type LocalType = {
     id: number;
+    user_id: number;
     name: string;
     description: string;
     hourlyRate?: number;
@@ -25,6 +26,7 @@ export default function Index({ locals }: { locals: LocalType[] }) {
                     <Local
                         local={{
                             id: local.id,
+                            user_id: local.user_id,
                             name: local.name,
                             description: local.description,
                             hourlyRate: local.hourlyRate,

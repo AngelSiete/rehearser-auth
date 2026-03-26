@@ -26,13 +26,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth', 'verified', 'owner'])->group(function () {
     Route::inertia('owner/dashboard', 'dashboardsByUsers/Owner')->name('owner.dashboard');
 });
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::inertia('user/dashboard', 'dashboardsByUsers/User')->name('user.dashboard');
+});
 
 Route::inertia('faq', 'faq')->name('faq');
 Route::inertia('somos', 'somos')->name('somos');
 
+/*
 Route::get('/{any}', function () {
     return Inertia::render('404');
-})->where('any', '.*');
+})->where('any', '.*');*/
 
 require __DIR__.'/locals.php';
 require __DIR__.'/settings.php';

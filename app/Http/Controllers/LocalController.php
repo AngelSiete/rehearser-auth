@@ -51,7 +51,8 @@ class LocalController extends Controller
      */
     public function show(Local $local)
     {
-        return Inertia::render('locals/local',['local'=>$local]);
+        return Inertia::render('locals/local',['local'=>$local,
+            'canEdit' => auth()->id() === $local->user_id,]);
     }
 
     /**
