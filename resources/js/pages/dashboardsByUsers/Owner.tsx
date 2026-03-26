@@ -1,5 +1,4 @@
 import { Link, router } from '@inertiajs/react';
-import { LogOut } from 'lucide-react';
 import { useMobileNavigation } from '@/hooks/use-mobile-navigation';
 import { logout } from '@/routes';
 type OwnerDashboardProps = {
@@ -21,9 +20,9 @@ const OwnerDashboard: React.FC<OwnerDashboardProps> = ({ auth }) => {
 
     return (
         <div className="p-6">
-            <h1 className="mb-4 text-2xl font-bold">Owner Dashboard</h1>
+            <h1 className="mb-4 text-2xl font-bold">Panel de Usuario - Propietario</h1>
             <p className="mb-4">
-                Welcome, {auth.user.name}! You are logged in as an owner.
+                Sé bienvenido, {auth.user.name}! propietario.
             </p>
             <div className="space-y-2"></div>
             <Link
@@ -33,8 +32,7 @@ const OwnerDashboard: React.FC<OwnerDashboardProps> = ({ auth }) => {
                 onClick={handleLogout}
                 data-test="logout-button"
             >
-                <LogOut className="mr-2" />
-                Log out
+                Sal de tu cuenta
             </Link>
         </div>
     );

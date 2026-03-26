@@ -13,7 +13,7 @@ type LocalType = {
 };
 export default function Local({ local } : {local: LocalType}) {
     const { auth } = usePage().props;
-    const isOwner = auth.user.id === local.user_id;
+    const isOwner = auth?.user?.id === local.user_id;
 
     return (
         <div className="local mx-auto w-full max-w-md rounded-2xl border border-gray-100 bg-white p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl dark:border-gray-800 dark:bg-gray-900">

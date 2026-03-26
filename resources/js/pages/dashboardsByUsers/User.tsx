@@ -21,10 +21,10 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ auth }) => {
 
     return (
         <div className="p-6">
-            <h1 className="mb-4 text-2xl font-bold">User Dashboard</h1>
-            <p className="mb-4">
-                Welcome, {auth.user.name}! You are logged in as an owner.
-            </p>
+            <h1 className="mb-4 text-2xl font-bold">
+                Panel de Usuario - Músico
+            </h1>
+            <p className="mb-4">Sé bienvenido, {auth.user.name}! músico.</p>
             <div className="space-y-2"></div>
             <Link
                 className="block w-full cursor-pointer"
@@ -33,8 +33,7 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ auth }) => {
                 onClick={handleLogout}
                 data-test="logout-button"
             >
-                <LogOut className="mr-2" />
-                Log out
+                Sal de tu cuenta
             </Link>
         </div>
     );

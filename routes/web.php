@@ -6,7 +6,7 @@ use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
 Route::inertia('/', 'welcome', [
-    'locals' => Local::latest()->take(5)->get(),
+    'locals' => Local::latest()->take(6)->get(),
 ])->name('home');
 
 /*Route::middleware(['auth', 'verified'])->group(function () {
