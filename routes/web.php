@@ -9,8 +9,22 @@ Route::inertia('/', 'welcome', [
     'locals' => Local::latest()->take(5)->get(),
 ])->name('home');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+/*Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'dashboard')->name('dashboard');
+});*/
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('dashboard', function () {
+        $user = auth()->user();
+
+        return match ($user->userType) {
+            'owner' => redirect()->route('owner.dashboard'),
+            'user' => redirect()->route('user.dashboard'),
+            default => inertia('Dashboard/User'),
+        };
+    })->name('dashboard');
+});
+Route::middleware(['auth', 'verified', 'owner'])->group(function () {
+    Route::inertia('owner/dashboard', 'dashboardsByUsers/Owner')->name('owner.dashboard');
 });
 
 Route::inertia('faq', 'faq')->name('faq');
