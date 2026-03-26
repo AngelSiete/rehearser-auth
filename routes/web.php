@@ -7,7 +7,6 @@ use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
 Route::inertia('/', 'welcome', [
-    'canRegister' => Features::enabled(Features::registration()),
     'locals' => Local::latest()->take(5)->get(),
 ])->name('home');
 
@@ -22,5 +21,8 @@ Route::put('/locals/{local}', [LocalController::class, 'update'])->name('locals.
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'dashboard')->name('dashboard');
 });
+
+Route::inertia('faq', 'faq')->name('faq');
+Route::inertia('somos', 'somos')->name('somos');
 
 require __DIR__.'/settings.php';
