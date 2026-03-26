@@ -13,14 +13,19 @@ Route::inertia('/', 'welcome', [
 Route::resource('locals', LocalController::class);
 
 Route::get('/local/{local}', [LocalController::class, 'show']);
-Route::get('/locals/create', [LocalController::class, 'create'])->name('locals.create');
 Route::post('/locals', [LocalController::class, 'store'])->name('locals.store');
 Route::get('/locals/{local}/edit', [LocalController::class, 'edit'])->name('locals.edit');
 Route::put('/locals/{local}', [LocalController::class, 'update'])->name('locals.update');
 
+/* PROTECTED ROUTES*/
+Route::get('/locals/create', [LocalController::class, 'create'])
+    ->middleware(['auth', 'owner'])
+    ->name('locals.create');
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::inertia('dashboard', 'dashboard')->name('dashboard');
 });
+/* END PROTECTED ROUTES*/
 
 Route::inertia('faq', 'faq')->name('faq');
 Route::inertia('somos', 'somos')->name('somos');
