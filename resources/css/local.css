@@ -1,3 +1,7 @@
-.local{
-    background: gray;
+.locals-index{
+    .local{
+        .descript,.direction{
+        display: none;
+        }
+    }
 }

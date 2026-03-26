@@ -13,12 +13,20 @@ export default function MainLayout({
             <header className="mb-6 w-full text-sm not-has-[nav]:hidden lg:max-w-4xl">
                 <nav className="flex items-center justify-between gap-4">
                     {auth.user ? (
-                        <Link
-                            href={dashboard()}
-                            className="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
-                        >
-                            Panel de Usuario
-                        </Link>
+                        <>
+                            <Link
+                                href={dashboard()}
+                                className="inline-block rounded-sm border border-[#19140035] px-5 py-1.5 text-sm leading-normal text-[#1b1b18] hover:border-[#1915014a] dark:border-[#3E3E3A] dark:text-[#EDEDEC] dark:hover:border-[#62605b]"
+                            >
+                                Panel de Usuario
+                            </Link>
+                            <Link
+                                href="/"
+                                className="inline-block px-5 py-1.5 text-xl leading-normal text-[#1b1b18] hover:border-[#19140035] hover:text-2xl hover:text-red-400 dark:text-[#EDEDEC] dark:hover:text-red-400"
+                            >
+                                Rehearser
+                            </Link>
+                        </>
                     ) : (
                         <>
                             <Link
@@ -29,7 +37,7 @@ export default function MainLayout({
                             </Link>
                             <Link
                                 href="/"
-                                className="inline-block px-5 py-1.5 text-xl leading-normal text-[#1b1b18] hover:border-[#19140035] hover:text-red-400 dark:text-[#EDEDEC] dark:hover:text-red-400 hover:text-2xl"
+                                className="inline-block px-5 py-1.5 text-xl leading-normal text-[#1b1b18] hover:border-[#19140035] hover:text-2xl hover:text-red-400 dark:text-[#EDEDEC] dark:hover:text-red-400"
                             >
                                 Rehearser
                             </Link>

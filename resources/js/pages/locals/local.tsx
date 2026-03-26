@@ -10,14 +10,14 @@ type LocalType = {
 };
 export default function Local({ local } : {local: LocalType}) {
     return (
-        <div className="mx-auto w-full max-w-md rounded-2xl border border-gray-100 bg-white p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl dark:border-gray-800 dark:bg-gray-900">
+        <div className="local mx-auto w-full max-w-md rounded-2xl border border-gray-100 bg-white p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl dark:border-gray-800 dark:bg-gray-900">
             {/* Title */}
             <h2 className="mb-2 text-2xl font-bold text-gray-800 dark:text-white">
                 {local.name}
             </h2>
 
             {/* Description */}
-            <p className="mb-4 text-sm text-gray-600 dark:text-gray-300">
+            <p className="mb-4 text-sm text-gray-600 dark:text-gray-300 descript">
                 {local.description}
             </p>
 
@@ -37,7 +37,7 @@ export default function Local({ local } : {local: LocalType}) {
                     </span>
                 </div>
 
-                <div className="flex flex-col">
+                <div className="flex flex-col direction">
                     <span className="text-gray-400">Direction</span>
                     <span className="font-semibold text-gray-800 dark:text-white">
                         {local.direction || '—'}
