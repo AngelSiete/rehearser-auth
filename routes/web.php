@@ -16,5 +16,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::inertia('faq', 'faq')->name('faq');
 Route::inertia('somos', 'somos')->name('somos');
 
+Route::get('/{any}', function () {
+    return Inertia::render('404');
+})->where('any', '.*');
+
 require __DIR__.'/locals.php';
 require __DIR__.'/settings.php';
