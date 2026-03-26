@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\LocalController;
+use App\Models\Local;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
 Route::inertia('/', 'welcome', [
     'canRegister' => Features::enabled(Features::registration()),
+    'locals' => Local::latest()->take(5)->get(),
 ])->name('home');
 
 Route::resource('locals', LocalController::class);

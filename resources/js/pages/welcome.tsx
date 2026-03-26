@@ -1,13 +1,25 @@
+import Index from '@/pages/locals';
 import { Head, Link, usePage } from '@inertiajs/react';
-import Index  from '@/pages/locals';
 import { dashboard, login, register } from '@/routes';
+type LocalType = {
+    id: number;
+    name: string;
+    description: string;
+    hourlyRate?: number;
+    city: string;
+    direction: string;
+    musicianCapacity: number;
+    hasEquipment: boolean;
+};
 export default function Welcome({
     canRegister = true,
+    locals
 }: {
     canRegister?: boolean;
+    locals: LocalType[];
 }) {
     const { auth } = usePage().props;
-
+    console.log({ locals });
     return (
         <>
             <Head title="Welcome">
@@ -49,7 +61,7 @@ export default function Welcome({
                 </header>
                 <div className="flex w-full items-center justify-center opacity-100 transition-opacity duration-750 lg:grow starting:opacity-0">
                     <main>
-                        {Index}
+                        <Index locals={locals} />
                     </main>
                 </div>
                 <div className="hidden h-14.5 lg:block"></div>
