@@ -39,7 +39,8 @@ class LocalController extends Controller
             'direction' => 'nullable|string|max:255',
             'musicianCapacity' => 'nullable|integer|min:0',
             'hasEquipment' => 'nullable|boolean',
-            'available_weekdays' => 'array',
+            'available_weekdays' => ['required', 'array', 'min:1'],
+            'available_weekdays.*' => ['integer', 'between:0,6'],
         ]);
         Local::create($validated);
 

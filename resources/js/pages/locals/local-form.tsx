@@ -1,7 +1,7 @@
 import { useForm } from '@inertiajs/react';
-
+import type { Weekday, FormData } from '@/types/local';
 export default function Create() {
-    const { data, setData, post, processing, errors } = useForm({
+    const { data, setData, post, processing, errors } = useForm<FormData>({
         name: '',
         description: '',
         hourlyRate: '',
@@ -9,11 +9,31 @@ export default function Create() {
         direction: '',
         musicianCapacity: '',
         hasEquipment: false,
+        available_weekdays: [],
     });
 
+    const weekdays: Weekday[] = [
+        { label: 'Sunday', value: 0 },
+        { label: 'Monday', value: 1 },
+        { label: 'Tuesday', value: 2 },
+        { label: 'Wednesday', value: 3 },
+        { label: 'Thursday', value: 4 },
+        { label: 'Friday', value: 5 },
+        { label: 'Saturday', value: 6 },
+    ];
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
         post('/locals');
+    }
+    function toggleWeekday(day: number) {
+        if (data.available_weekdays.includes(day)) {
+            setData(
+                'available_weekdays',
+                data.available_weekdays.filter((d) => d !== day),
+            );
+        } else {
+            setData('available_weekdays', [...data.available_weekdays, day]);
+        }
     }
 
     return (
@@ -100,6 +120,25 @@ export default function Create() {
                     Has Equipment
                 </label>
                 {errors.hasEquipment && <div>{errors.hasEquipment}</div>}
+            </div>
+            <div>
+                <p>Disponibilidad</p>
+                {weekdays.map((day: Weekday) => (
+                    <label key={day.value} style={{ display: 'block' }}>
+                        <input
+                            type="checkbox"
+                            checked={data.available_weekdays.includes(
+                                day.value,
+                            )}
+                            onChange={() => toggleWeekday(day.value)}
+                        />
+                        {day.label}
+                    </label>
+                ))}
+
+                {errors.available_weekdays && (
+                    <div>{errors.available_weekdays}</div>
+                )}
             </div>
 
             <button type="submit" disabled={processing}>
