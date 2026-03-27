@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Local;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class LocalController extends Controller
@@ -15,7 +14,8 @@ class LocalController extends Controller
     public function index()
     {
         $locals = Local::latest()->get();
-        return Inertia::render('locals/index',['locals'=>$locals]);
+
+        return Inertia::render('locals/index', ['locals' => $locals]);
     }
 
     /**
@@ -51,8 +51,8 @@ class LocalController extends Controller
      */
     public function show(Local $local)
     {
-        return Inertia::render('locals/local',['local'=>$local,
-            'canEdit' => auth()->id() === $local->user_id,]);
+        return Inertia::render('locals/local', ['local' => $local,
+            'canEdit' => auth()->id() === $local->user_id, ]);
     }
 
     /**
@@ -60,7 +60,7 @@ class LocalController extends Controller
      */
     public function edit(Local $local)
     {
-        return Inertia::render('locals/local-form-edit', ['local'=>$local]);
+        return Inertia::render('locals/local-form-edit', ['local' => $local]);
     }
 
     /**
@@ -72,22 +72,22 @@ class LocalController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'hourlyRate' => 'required|numeric|min:0',
-
             'city' => 'nullable|string|max:255',
             'direction' => 'nullable|string|max:255',
             'musicianCapacity' => 'nullable|integer|min:0',
             'hasEquipment' => 'nullable|boolean',
+            'available_weekdays' => 'array',
         ]);
 
         $local->update([
             'name' => $validated['name'],
             'description' => $validated['description'],
             'hourly_rate' => $validated['hourlyRate'],
-
             'city' => $validated['city'] ?? null,
             'direction' => $validated['direction'] ?? null,
             'musician_capacity' => $validated['musicianCapacity'] ?? null,
             'has_equipment' => $validated['hasEquipment'] ?? false,
+            'available_weekdays' => $validated['available_weekdays'] ?? false,
         ]);
 
         return redirect()->route('locals.index');

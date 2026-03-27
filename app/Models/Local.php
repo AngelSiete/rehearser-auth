@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Local extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','city','direction','musicianCapacity','hasEquipment','description','hourlyRate'];
+    protected $fillable = ['name','city','direction','musicianCapacity','hasEquipment','description','hourlyRate','available_weekdays'];
     protected static function booted()
     {
         static::creating(function ($local) {

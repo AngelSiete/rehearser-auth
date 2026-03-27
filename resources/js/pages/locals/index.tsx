@@ -1,22 +1,18 @@
 
 import { Link } from '@inertiajs/react';
+import type { LocalType } from '@/types/local';
 import Local from './local';
 
-type LocalType = {
-    id: number;
-    user_id: number;
-    name: string;
-    description: string;
-    hourlyRate?: number;
-    city: string;
-    direction: string;
-    musicianCapacity: number;
-    hasEquipment: boolean;
-};
 export default function Index({ locals }: { locals: LocalType[] }) {
+    const isLocalsEmpty : boolean = (locals && locals.length === 0);
 
     return (
         <div className="locals-index grid grid-cols-1 gap-6 md:grid-cols-3">
+            {isLocalsEmpty && (
+                <h2 className="text-center md:w-120 dark:text-white">
+                    Parece que no hay locales que coincidan con tu búsqueda!
+                </h2>
+            )}
             {locals.map((local: LocalType) => (
                 <Link
                     key={local.id}
@@ -34,6 +30,7 @@ export default function Index({ locals }: { locals: LocalType[] }) {
                             direction: local.direction,
                             musicianCapacity: local.musicianCapacity,
                             hasEquipment: local.hasEquipment,
+                            available_weekdays: local.available_weekdays,
                         }}
                     />
                 </Link>

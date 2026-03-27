@@ -12,17 +12,7 @@ type OwnerDashboardProps = {
         };
     };
 };
-type LocalType = {
-    id: number;
-    user_id: number;
-    name: string;
-    description: string;
-    hourlyRate?: number;
-    city: string;
-    direction: string;
-    musicianCapacity: number;
-    hasEquipment: boolean;
-};
+import type { LocalType } from '@/types/local';
 
 const OwnerDashboard: React.FC<OwnerDashboardProps> = ({ auth }) => {
     const cleanup = useMobileNavigation();
@@ -43,6 +33,7 @@ const OwnerDashboard: React.FC<OwnerDashboardProps> = ({ auth }) => {
             </p>
             <div className="space-y-2"></div>
             <Index locals={locals} />
+            <Link href='/locals/create'>Sube un nuevo local</Link>
             <Link
                 className="block w-full cursor-pointer"
                 href={logout()}

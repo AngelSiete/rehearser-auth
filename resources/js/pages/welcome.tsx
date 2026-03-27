@@ -1,17 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import Index from '@/pages/locals';
+import type { LocalType } from '@/types/local';
 
-type LocalType = {
-    id: number;
-    user_id: number;
-    name: string;
-    description: string;
-    hourlyRate?: number;
-    city: string;
-    direction: string;
-    musicianCapacity: number;
-    hasEquipment: boolean;
-};
 export default function Welcome({
     locals
 }: {

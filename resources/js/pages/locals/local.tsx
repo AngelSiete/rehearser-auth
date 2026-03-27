@@ -1,16 +1,6 @@
 import { Link, usePage } from '@inertiajs/react';
 
-type LocalType = {
-    id: number;
-    user_id: number;
-    name: string;
-    description?: string;
-    hourlyRate?: number;
-    city: string;
-    direction: string;
-    musicianCapacity: number;
-    hasEquipment:boolean;
-};
+import type { LocalType } from '@/types/local';
 export default function Local({ local } : {local: LocalType}) {
     const { auth } = usePage().props;
     const isLocalPage : boolean = usePage().url.startsWith('/local/');
@@ -58,7 +48,6 @@ export default function Local({ local } : {local: LocalType}) {
                     </span>
                 </div>
             </div>
-
             {/* Equipment badge */}
             <div className="mt-5">
                 <span
@@ -76,6 +65,7 @@ export default function Local({ local } : {local: LocalType}) {
                     Edit
                 </Link>
             )}
+            {local.available_weekdays}
         </div>
     );
 };
