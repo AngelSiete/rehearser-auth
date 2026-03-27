@@ -14,4 +14,5 @@ Route::get('/locals/{local}/edit', [LocalController::class, 'edit'])
     ->middleware(['auth', 'can:update,local'])
     ->name('locals.edit');
 
+Route::post('/locals/{local}/bookings', [BookingController::class, 'store'])->middleware(['auth', 'user'])->name('bookings.store');
 /* END PROTECTED ROUTES*/

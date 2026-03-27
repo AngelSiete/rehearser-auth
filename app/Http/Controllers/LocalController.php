@@ -39,8 +39,8 @@ class LocalController extends Controller
             'direction' => 'nullable|string|max:255',
             'musicianCapacity' => 'nullable|integer|min:0',
             'hasEquipment' => 'nullable|boolean',
+            'available_weekdays' => 'array',
         ]);
-
         Local::create($validated);
 
         return redirect()->route('locals.index');

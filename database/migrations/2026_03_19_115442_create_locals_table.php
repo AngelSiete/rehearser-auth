@@ -22,6 +22,7 @@ return new class extends Migration
             $table->boolean('hasEquipment');
             $table->text('description');
             $table->integer('hourlyRate');
+            $table->json('available_weekdays');
         });
     }
 
