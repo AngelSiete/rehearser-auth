@@ -28,20 +28,42 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ auth, bookings }) => {
             </h1>
             <p className="mb-4">Sé bienvenido, {auth.user.name}! músico.</p>
             <h2>Mis reservas:</h2>
-            <ul className="my-8">
+            <ul className="space-y-2">
                 {bookings.map((booking) => (
-                    <li
-                        key={booking.id}
-                        className="rounded-md border border-gray-200 bg-white p-4 shadow-sm transition-shadow duration-200 hover:shadow-md dark:bg-gray-500"
-                    >
-                        <Link
-                            href={`/local/${booking.local.id}`}
-                            className="block text-gray-800 hover:text-red-800"
-                        >
-                            Reserva en el local{' '}
-                            <strong>{booking.local.name}</strong> para el día{' '}
-                            {booking.booking_date} en {booking.local.city}
-                        </Link>
+                    <li key={booking.id}>
+                        <details className="group rounded-md border border-gray-200 bg-white shadow-sm">
+                            <summary className="flex cursor-pointer list-none items-center justify-between p-4 transition hover:bg-gray-50">
+                                <span className="text-gray-800 group-hover:text-red-800">
+                                    <strong>{booking.local.name}</strong> —{' '}
+                                    {booking.booking_date}
+                                </span>
+                                <span className="text-sm text-gray-400">
+                                    Más info
+                                </span>
+                            </summary>
+
+                            <div className="space-y-1 px-4 pb-4 text-sm text-gray-600">
+                                <p>Ciudad: {booking.local.city}</p>
+                                <p>Dirección: {booking.local.direction}</p>
+                                {booking.local.hourlyRate && (
+                                    <p>Precio: €{booking.local.hourlyRate}/hr</p>
+                                )}
+                                {booking.local.musicianCapacity && (
+                                    <p>
+                                        Capacidad:{' '}
+                                        {booking.local.musicianCapacity}{' '}
+                                        músicos
+                                    </p>
+                                )}
+
+                                <Link
+                                    href={`/local/${booking.local.id}`}
+                                    className="mt-2 inline-block text-red-800 hover:underline"
+                                >
+                                    Ver ficha del local →
+                                </Link>
+                            </div>
+                        </details>
                     </li>
                 ))}
             </ul>
