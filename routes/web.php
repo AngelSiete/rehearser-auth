@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Models\Local;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -11,34 +12,17 @@ Route::inertia('/', 'welcome', [
     'locals' => Local::latest()->take(6)->get(),
 ])->name('home');
 
-/*Route::middleware(['auth', 'verified'])->group(function () {
-    Route::inertia('dashboard', 'dashboard')->name('dashboard');
-});*/
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', function () {
-        $user = auth()->user();
 
-        return match ($user->userType) {
-            'owner' => redirect()->route('owner.dashboard'),
-            'user' => Inertia::render('dashboardsByUsers/User', [
-                'bookings' => $user->bookings()
-                    ->with('local')           // eager load related Local
-                    ->orderBy('booking_date', 'desc')
-                    ->get(),
-            ]),
-            default => inertia('Dashboard/User'),
-        };
-    })->name('dashboard');
-});
-/*Route::middleware(['auth', 'verified', 'owner'])->group(function () {
-    Route::inertia('owner/dashboard', 'dashboardsByUsers/Owner')->name('owner.dashboard');
-});*/
-Route::middleware(['auth', 'verified', 'owner'])->group(function () {
-    Route::get('owner/dashboard', [PropietarioController::class, 'dashboard'])
-        ->name('owner.dashboard');
-});
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::inertia('user/dashboard', 'dashboardsByUsers/User')->name('user.dashboard');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('user/dashboard', [DashboardController::class, 'userDashboard'])
+        ->name('user.dashboard');
+
+    Route::middleware('owner')->group(function () {
+        Route::get('owner/dashboard', [PropietarioController::class, 'dashboard'])
+            ->name('owner.dashboard');
+    });
 });
 
 Route::inertia('faq', 'faq')->name('faq');
