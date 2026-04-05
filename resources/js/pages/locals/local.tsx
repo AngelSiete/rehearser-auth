@@ -1,11 +1,15 @@
 import { Link, usePage } from '@inertiajs/react';
+import { useState } from 'react';
 
+import BookingForm from '@/pages/locals/booking-form';
 import type { LocalType } from '@/types/local';
 import { translateDays } from '@/utils/days';
 export default function Local({ local } : {local: LocalType}) {
     const { auth } = usePage().props;
     const isLocalPage : boolean = usePage().url.startsWith('/local/');
     const isOwner : boolean = auth?.user?.id === local.user_id;
+    const [showBookingForm, setShowBookingForm] = useState(false);
+    const toggleBookingForm = () => setShowBookingForm((prev) => !prev);
     const translatedDays = local.available_weekdays
         ? translateDays(local.available_weekdays)
         : null;
@@ -70,10 +74,25 @@ export default function Local({ local } : {local: LocalType}) {
                     {translatedDays ? translatedDays.join(', ') : '—'}
                 </span>
             </div>
+            {auth?.user && (
+                <button
+                    onClick={toggleBookingForm}
+                    className="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+                >
+                    {showBookingForm ? 'Cancelar' : 'Reservar'}
+                </button>
+            )}
+
+            {showBookingForm && (
+                <BookingForm
+                    local={local}
+                    bookedDates={local.booked_dates ?? []}
+                />
+            )}
             {isOwner && isLocalPage && (
                 <Link
                     href={`/locals/${local.id}/edit`}
-                    className="btn-edit rounded-full bg-blue-800 dark:bg-blue-600 px-3 py-1 text-white"
+                    className="btn-edit rounded-full bg-blue-800 px-3 py-1 text-white dark:bg-blue-600"
                 >
                     Edit
                 </Link>

@@ -24,8 +24,12 @@ class BookingController extends Controller
      */
     public function create(Local $local)
     {
+
+        $bookedDates = $local->bookings()->pluck('booking_date')->toArray();
+
         return Inertia::render('locals/booking', [
             'local' => $local,
+            'bookedDates' => $bookedDates,
         ]);
     }
 
