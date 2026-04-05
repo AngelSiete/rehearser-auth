@@ -18,12 +18,23 @@ class LocalController extends Controller
 //        return Inertia::render('locals/index', ['locals' => $locals]);
         $query = Local::query();
 
-        // 🔍 Search filter
+        // 🔍 Parámetros de búsqueda
         if ($search = $request->input('search')) {
             $query->where(function ($q) use ($search) {
                 $q->where('name', 'like', "%{$search}%")
                     ->orWhere('description', 'like', "%{$search}%")
                     ->orWhere('city', 'like', "%{$search}%");
+            });
+        }
+        if ($maxPrice = $request->input('maxPrice')) {
+            $query->where('hourlyRate', '<=', $maxPrice);
+        }
+        if ($days = $request->input('days')) {
+            $daysArray = is_array($days) ? $days : explode(',', $days);
+            $query->where(function ($q) use ($daysArray) {
+                foreach ($daysArray as $day) {
+                    $q->whereJsonContains('available_weekdays', (int)$day);
+                }
             });
         }
 
@@ -34,7 +45,7 @@ class LocalController extends Controller
 
         return Inertia::render('locals/index', [
             'locals' => $locals,
-            'filters' => $request->only(['search']),
+            'filters' => $request->only(['search','maxPrice','days']),
         ]);
     }
 
