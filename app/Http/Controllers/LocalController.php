@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Local;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -98,6 +99,10 @@ class LocalController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
     public function update(Request $request, Local $local)
     {
         $validated = $request->validate([

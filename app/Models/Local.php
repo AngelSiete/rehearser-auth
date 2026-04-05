@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Booking;
 
 class Local extends Model
 {
@@ -24,7 +25,10 @@ class Local extends Model
             }
         });
     }
-
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
     // Relationship
     public function user()
     {

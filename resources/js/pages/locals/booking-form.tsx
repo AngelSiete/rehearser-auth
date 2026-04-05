@@ -60,7 +60,7 @@ export default function BookingForm({
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <label className="flex flex-col">
-                    Select date:
+                    Selecciona la fecha:
                     <input
                         type="date"
                         value={date}
