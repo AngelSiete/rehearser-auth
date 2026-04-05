@@ -1,5 +1,4 @@
 import { Link, router } from '@inertiajs/react';
-import { LogOut } from 'lucide-react';
 import { useMobileNavigation } from '@/hooks/use-mobile-navigation';
 import { logout } from '@/routes';
 import type { BookingType } from '@/types/bookings';
