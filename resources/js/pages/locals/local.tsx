@@ -74,7 +74,7 @@ export default function Local({ local } : {local: LocalType}) {
                     {translatedDays ? translatedDays.join(', ') : '—'}
                 </span>
             </div>
-            {auth?.user && (
+            {auth?.user && isLocalPage && (
                 <button
                     onClick={toggleBookingForm}
                     className="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
@@ -83,7 +83,7 @@ export default function Local({ local } : {local: LocalType}) {
                 </button>
             )}
 
-            {showBookingForm && (
+            {showBookingForm && isLocalPage && (
                 <BookingForm
                     local={local}
                     bookedDates={local.booked_dates ?? []}
