@@ -2,6 +2,7 @@ import { Link, router } from '@inertiajs/react';
 import { LogOut } from 'lucide-react';
 import { useMobileNavigation } from '@/hooks/use-mobile-navigation';
 import { logout } from '@/routes';
+import type { BookingType } from '@/types/bookings';
 type UserDashboardProps = {
     auth: {
         user: {
@@ -9,18 +10,20 @@ type UserDashboardProps = {
             email: string;
         };
     };
+    bookings: BookingType[];
 };
 
-const UserDashboard: React.FC<UserDashboardProps> = ({ auth }) => {
+const UserDashboard: React.FC<UserDashboardProps> = ({ auth, bookings }) => {
     const cleanup = useMobileNavigation();
 
     const handleLogout = () => {
         cleanup();
         router.flushAll();
     };
-
+    console.log(bookings)
     return (
         <div className="p-6">
+            <pre>{JSON.stringify(bookings, null, 2)}</pre>
             <h1 className="mb-4 text-2xl font-bold">
                 Panel de Usuario - Músico
             </h1>

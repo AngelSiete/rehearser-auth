@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
 use App\Http\Controllers\PropietarioController;
+use App\Http\Controllers\BookingController;
 
 Route::inertia('/', 'welcome', [
     'locals' => Local::latest()->take(6)->get(),
@@ -19,7 +20,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         return match ($user->userType) {
             'owner' => redirect()->route('owner.dashboard'),
-            'user' => redirect()->route('user.dashboard'),
+            'user' => Inertia::render('dashboardsByUsers/User', [
+                'bookings' => $user->bookings()
+                    ->with('local')           // eager load related Local
+                    ->orderBy('booking_date', 'desc')
+                    ->get(),
+            ]),
             default => inertia('Dashboard/User'),
         };
     })->name('dashboard');

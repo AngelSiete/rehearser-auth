@@ -18,6 +18,7 @@ export default function BookingForm({
 
     useEffect(() => {
         if (flash?.success) setSuccess(flash.success);
+
         if (flash?.error) setError(flash.error);
     }, [flash]);
 
@@ -25,6 +26,7 @@ export default function BookingForm({
         const day = new Date(d).getDay(); // 0 = Sunday, 6 = Saturday
         const weekdayAvailable = local.available_weekdays.includes(day);
         const alreadyBooked = bookedDates.includes(d);
+
         return !weekdayAvailable || alreadyBooked;
     };
 
@@ -33,16 +35,19 @@ export default function BookingForm({
 
         if (!auth?.user) {
             setError('You must be logged in to book.');
+
             return;
         }
 
         if (!date) {
             setError('Please select a date.');
+
             return;
         }
 
         if (isDateDisabled(date)) {
             setError('Selected date is not available.');
+
             return;
         }
 
