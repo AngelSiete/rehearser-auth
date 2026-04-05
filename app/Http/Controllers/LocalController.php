@@ -11,11 +11,31 @@ class LocalController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $locals = Local::latest()->get();
+//        $locals = Local::latest()->get();
+//
+//        return Inertia::render('locals/index', ['locals' => $locals]);
+        $query = Local::query();
 
-        return Inertia::render('locals/index', ['locals' => $locals]);
+        // 🔍 Search filter
+        if ($search = $request->input('search')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%")
+                    ->orWhere('city', 'like', "%{$search}%");
+            });
+        }
+
+        $locals = $query
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+
+        return Inertia::render('locals/index', [
+            'locals' => $locals,
+            'filters' => $request->only(['search']),
+        ]);
     }
 
     /**
