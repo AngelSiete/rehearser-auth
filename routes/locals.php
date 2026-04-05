@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\LocalController;
 
 Route::resource('locals', LocalController::class);
@@ -14,5 +16,9 @@ Route::get('/locals/{local}/edit', [LocalController::class, 'edit'])
     ->middleware(['auth', 'can:update,local'])
     ->name('locals.edit');
 
-Route::post('/locals/{local}/bookings', [BookingController::class, 'store'])->middleware(['auth', 'user'])->name('bookings.store');
+Route::middleware('auth')->group(function () {
+    Route::get('/locals/{local}/book', [BookingController::class, 'create'])->name('booking.create');
+    Route::post('/locals/{local}/book', [BookingController::class, 'store'])->name('booking.store');
+});
+//Route::post('/locals/{local}/bookings', [BookingController::class, 'store'])->middleware(['auth', 'user'])->name('bookings.store');
 /* END PROTECTED ROUTES*/

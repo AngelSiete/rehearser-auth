@@ -7,6 +7,7 @@ use App\Models\Local;
 use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class BookingController extends Controller
 {
@@ -21,9 +22,11 @@ class BookingController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Local $local)
     {
-        //
+        return Inertia::render('locals/booking', [
+            'local' => $local,
+        ]);
     }
 
     /**
@@ -37,25 +40,31 @@ class BookingController extends Controller
 
         $date = Carbon::parse($validated['booking_date']);
 
-        // Check weekday availability
+        // ✅ Check weekday availability
         if (! in_array($date->dayOfWeek, $local->available_weekdays)) {
             return back()->withErrors([
-                'booking_date' => 'Not available on this day.',
+                'booking_date' => 'This space is not available on this day.',
             ]);
         }
 
-        try {
-            $local->bookings()->create([
-                'user_id' => auth()->id(),
-                'booking_date' => $date->toDateString(),
-            ]);
+        // ✅ Check for existing booking
+        $alreadyBooked = $local->bookings()
+            ->where('booking_date', $date->toDateString())
+            ->exists();
 
-            return back()->with('success', 'Booked!');
-        } catch (QueryException $e) {
+        if ($alreadyBooked) {
             return back()->withErrors([
-                'booking_date' => 'Already booked.',
+                'booking_date' => 'This day is already booked.',
             ]);
         }
+
+        // ✅ Create booking
+        $local->bookings()->create([
+            'user_id' => auth()->id(),
+            'booking_date' => $date->toDateString(),
+        ]);
+
+        return back()->with('success', 'Booking confirmed!');
     }
 
     /**
