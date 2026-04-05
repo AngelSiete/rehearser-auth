@@ -27,13 +27,20 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ auth, bookings }) => {
                 Panel de Usuario - Músico
             </h1>
             <p className="mb-4">Sé bienvenido, {auth.user.name}! músico.</p>
-            <h2>Mis reservas</h2>
-            <ul>
+            <h2>Mis reservas:</h2>
+            <ul className="my-8">
                 {bookings.map((booking) => (
-                    <li key={booking.id}>
-                        <Link href={`/local/${booking.local.id}`}>
-                        Reserva en el local <strong>{booking.local.name}</strong> para el día {' '}
-                        {booking.booking_date} en {booking.local.city}
+                    <li
+                        key={booking.id}
+                        className="rounded-md border border-gray-200 bg-white p-4 shadow-sm transition-shadow duration-200 hover:shadow-md dark:bg-gray-500"
+                    >
+                        <Link
+                            href={`/local/${booking.local.id}`}
+                            className="block text-gray-800 hover:text-red-800"
+                        >
+                            Reserva en el local{' '}
+                            <strong>{booking.local.name}</strong> para el día{' '}
+                            {booking.booking_date} en {booking.local.city}
                         </Link>
                     </li>
                 ))}
