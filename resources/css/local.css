@@ -1,6 +1,6 @@
 .locals-index{
     .local{
-        .descript,.direction,.btn-edit{
+        .descript,.direction,.btn-edit,.days{
         display: none;
         }
     }

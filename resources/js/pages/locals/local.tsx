@@ -1,10 +1,14 @@
 import { Link, usePage } from '@inertiajs/react';
 
 import type { LocalType } from '@/types/local';
+import { translateDays } from '@/utils/days';
 export default function Local({ local } : {local: LocalType}) {
     const { auth } = usePage().props;
     const isLocalPage : boolean = usePage().url.startsWith('/local/');
     const isOwner : boolean = auth?.user?.id === local.user_id;
+    const translatedDays = local.available_weekdays
+        ? translateDays(local.available_weekdays)
+        : null;
 
     return (
         <div className="local mx-auto w-full max-w-md rounded-2xl border border-gray-100 bg-white p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl dark:border-gray-800 dark:bg-gray-900">
@@ -60,12 +64,20 @@ export default function Local({ local } : {local: LocalType}) {
                     {local.hasEquipment ? 'Has Equipment' : 'No Equipment'}
                 </span>
             </div>
-            {(isOwner && isLocalPage) && (
-                <Link href={`/locals/${local.id}/edit`} className="btn-edit dark:text-white">
+            {isOwner && isLocalPage && (
+                <Link
+                    href={`/locals/${local.id}/edit`}
+                    className="btn-edit dark:text-white"
+                >
                     Edit
                 </Link>
             )}
-            {local.available_weekdays}
+            <div className="mt-4 flex flex-col days">
+                <span className="text-gray-400">Disponibilidad</span>
+                <span className="font-semibold text-gray-800 dark:text-white">
+                    {translatedDays ? translatedDays.join(', ') : '—'}
+                </span>
+            </div>
         </div>
     );
 };

@@ -1,3 +1,5 @@
+export type DayNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7;
+
 export type LocalType = {
     id: number;
     user_id: number;
@@ -8,7 +10,7 @@ export type LocalType = {
     direction: string;
     musicianCapacity: number;
     hasEquipment: boolean;
-    available_weekdays: number[];
+    available_weekdays: DayNumber[];
 };
 
 export type FormData = {
