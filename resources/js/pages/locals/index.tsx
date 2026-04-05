@@ -9,7 +9,8 @@ export default function Index({ locals }: { locals: LocalsProp }) {
     const { filters } = usePage().props as {
         filters: { search?: string };
     };
-    const isNotWelcomePage = usePage().url !== '/';
+    const isNotWelcomePage =
+        usePage().url !== '/' && usePage().url !== '/owner/dashboard';
     const localsArray = Array.isArray(locals) ? locals : locals.data;
     const isLocalsEmpty = localsArray.length === 0;
 

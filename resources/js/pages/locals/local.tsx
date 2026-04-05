@@ -64,20 +64,20 @@ export default function Local({ local } : {local: LocalType}) {
                     {local.hasEquipment ? 'Has Equipment' : 'No Equipment'}
                 </span>
             </div>
-            {isOwner && isLocalPage && (
-                <Link
-                    href={`/locals/${local.id}/edit`}
-                    className="btn-edit dark:text-white"
-                >
-                    Edit
-                </Link>
-            )}
-            <div className="mt-4 flex flex-col days">
+            <div className="days mt-4 flex flex-col">
                 <span className="text-gray-400">Disponibilidad</span>
                 <span className="font-semibold text-gray-800 dark:text-white">
                     {translatedDays ? translatedDays.join(', ') : '—'}
                 </span>
             </div>
+            {isOwner && isLocalPage && (
+                <Link
+                    href={`/locals/${local.id}/edit`}
+                    className="btn-edit rounded-full bg-blue-800 dark:bg-blue-600 px-3 py-1 text-white"
+                >
+                    Edit
+                </Link>
+            )}
         </div>
     );
 };
