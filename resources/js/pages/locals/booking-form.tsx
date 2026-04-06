@@ -1,5 +1,5 @@
 import { router, usePage } from '@inertiajs/react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import type { LocalType } from '@/types/local';
 
 type BookingFormProps = {
