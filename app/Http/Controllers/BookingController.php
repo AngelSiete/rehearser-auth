@@ -47,7 +47,7 @@ class BookingController extends Controller
         // ✅ Check weekday availability
         if (! in_array($date->dayOfWeek, $local->available_weekdays)) {
             return back()->withErrors([
-                'booking_date' => 'This space is not available on this day.',
+                'booking_date' => 'Día no disponible.',
             ]);
         }
 
@@ -58,7 +58,7 @@ class BookingController extends Controller
 
         if ($alreadyBooked) {
             return back()->withErrors([
-                'booking_date' => 'This day is already booked.',
+                'booking_date' => 'Día ya reservado.',
             ]);
         }
 
@@ -68,7 +68,7 @@ class BookingController extends Controller
             'booking_date' => $date->toDateString(),
         ]);
 
-        return back()->with('success', 'Booking confirmed!');
+        return back()->with('success', 'Reserva confirmada!');
     }
 
     /**

@@ -14,13 +14,7 @@ export default function BookingForm({
     const [date, setDate] = useState('');
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
-    const { auth, flash } = usePage().props as any;
-
-    useEffect(() => {
-        if (flash?.success) setSuccess(flash.success);
-
-        if (flash?.error) setError(flash.error);
-    }, [flash]);
+    const { auth } = usePage().props as any;
 
     const isDateDisabled = (d: string) => {
         const day = new Date(d).getDay(); // 0 = Sunday, 6 = Saturday
@@ -34,26 +28,41 @@ export default function BookingForm({
         e.preventDefault();
 
         if (!auth?.user) {
-            setError('You must be logged in to book.');
+            setError('Entra en tu cuenta para reservar.');
 
             return;
         }
 
         if (!date) {
-            setError('Please select a date.');
+            setError('Por favor elija una fecha.');
 
             return;
         }
 
         if (isDateDisabled(date)) {
-            setError('Selected date is not available.');
+            setError('Fecha no disponible.');
 
             return;
         }
 
         setError(null);
 
-        router.post(`/locals/${local.id}/book`, { booking_date: date });
+        router.post(
+            `/locals/${local.id}/book`,
+            { booking_date: date },
+            {
+                preserveScroll: true,
+                onSuccess: () => {
+                    setSuccess('Reserva confirmada!');
+                    setError(null);
+                    setDate('');
+                },
+                onError: (errors) => {
+                    setSuccess(null);
+                    setError(errors.booking_date);
+                },
+            },
+        );
     };
 
     const today = new Date().toISOString().split('T')[0];
