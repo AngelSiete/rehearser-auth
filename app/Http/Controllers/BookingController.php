@@ -68,7 +68,7 @@ class BookingController extends Controller
             'booking_date' => $date->toDateString(),
         ]);
 
-        return back()->with('success', 'Reserva confirmada!');
+        return redirect('/dashboard')->with('success', 'Reserva confirmada!');
     }
 
     /**

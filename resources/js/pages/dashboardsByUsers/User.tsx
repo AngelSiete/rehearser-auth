@@ -1,4 +1,4 @@
-import { Link, router } from '@inertiajs/react';
+import { Link, router, usePage } from '@inertiajs/react';
 import { useMobileNavigation } from '@/hooks/use-mobile-navigation';
 import { logout } from '@/routes';
 import type { BookingType } from '@/types/bookings';
@@ -13,6 +13,7 @@ type UserDashboardProps = {
 };
 
 const UserDashboard: React.FC<UserDashboardProps> = ({ auth, bookings }) => {
+    const { flash } = usePage().props as any;
     const cleanup = useMobileNavigation();
 
     const handleLogout = () => {
@@ -25,6 +26,11 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ auth, bookings }) => {
             <h1 className="mb-4 text-2xl font-bold">
                 Panel de Usuario - Músico
             </h1>
+            {flash?.success && (
+                <div className="rounded-lg border border-green-300 bg-green-100 px-4 py-2 text-sm text-green-800 shadow-md">
+                    {flash.success}
+                </div>
+            )}
             <p className="mb-4">Sé bienvenido, {auth.user.name}! músico.</p>
             <h2>Mis reservas:</h2>
             <ul className="space-y-2">
@@ -45,13 +51,14 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ auth, bookings }) => {
                                 <p>Ciudad: {booking.local.city}</p>
                                 <p>Dirección: {booking.local.direction}</p>
                                 {booking.local.hourlyRate && (
-                                    <p>Precio: €{booking.local.hourlyRate}/hr</p>
+                                    <p>
+                                        Precio: €{booking.local.hourlyRate}/hr
+                                    </p>
                                 )}
                                 {booking.local.musicianCapacity && (
                                     <p>
                                         Capacidad:{' '}
-                                        {booking.local.musicianCapacity}{' '}
-                                        músicos
+                                        {booking.local.musicianCapacity} músicos
                                     </p>
                                 )}
 
