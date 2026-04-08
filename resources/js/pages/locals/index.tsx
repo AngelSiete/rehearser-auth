@@ -31,7 +31,7 @@ export default function Index({ locals }: { locals: LocalsProp }) {
                     <Link
                         key={local.id}
                         href={`/local/${local.id}`}
-                        className="rounded-lg p-4 shadow"
+                        className="rounded-lg p-4"
                     >
                         <Local local={local} />
                     </Link>
