@@ -74,7 +74,7 @@ export default function Local({ local } : {local: LocalType}) {
                     {translatedDays ? translatedDays.join(', ') : '—'}
                 </span>
             </div>
-            {auth?.user && isLocalPage && (
+            {auth?.user && isLocalPage &&!isOwner && (
                 <button
                     onClick={toggleBookingForm}
                     className="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
@@ -94,7 +94,7 @@ export default function Local({ local } : {local: LocalType}) {
                     href={`/locals/${local.id}/edit`}
                     className="btn-edit rounded-full bg-blue-800 px-3 py-1 text-white dark:bg-blue-600"
                 >
-                    Edit
+                    Editar
                 </Link>
             )}
         </div>
