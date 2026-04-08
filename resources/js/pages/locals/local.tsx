@@ -25,7 +25,7 @@ export default function Local({ local } : {local: LocalType}) {
     };
 
     return (
-        <div className="local mx-auto w-full max-w-md rounded-2xl border border-gray-100 bg-white p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl dark:border-gray-800 dark:bg-gray-900">
+        <div className="local mx-auto w-full max-w-md rounded-2xl border border-gray-100 bg-gray-100 p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl dark:border-gray-800 dark:bg-gray-900">
             {/* Title */}
             <h2 className="mb-2 text-2xl font-bold text-gray-800 dark:text-white">
                 {local.name}

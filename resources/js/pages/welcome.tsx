@@ -27,7 +27,7 @@ export default function Welcome({
                         <Index locals={locals}/>
                         <Link
                             href="/locals"
-                            className="mt-6 rounded-sm border border-transparent px-5 py-1.5 text-xl leading-normal text-[#1b1b18] hover:border-[#19140035] dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A] m-auto flex justify-center"
+                            className="barra-buscar mt-6 rounded-sm border border-transparent px-5 py-1.5 text-xl leading-normal text-[#1b1b18] hover:border-[#19140035] dark:text-[#EDEDEC] dark:hover:border-[#3E3E3A] m-auto flex justify-center"
                         >
                            Busca entre todos nuestros locales
                         </Link>

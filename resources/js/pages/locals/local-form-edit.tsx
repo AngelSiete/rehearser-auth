@@ -110,7 +110,7 @@ export default function Edit({ local }: { local: LocalType }) {
             </div>
 
             <button type="submit" disabled={processing}>
-                Update
+                Actualizar
             </button>
         </form>
     );

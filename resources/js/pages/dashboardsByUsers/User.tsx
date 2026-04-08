@@ -40,7 +40,7 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ auth, bookings }) => {
                 <BookingList bookings={bookings} />
             </div>
             <Link
-                className="block w-full cursor-pointer"
+                className="mt-4 block w-full cursor-pointer"
                 href={logout()}
                 as="button"
                 onClick={handleLogout}

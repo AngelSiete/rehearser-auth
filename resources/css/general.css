@@ -1,0 +1,30 @@
+html.dark{
+   main{
+       div{
+           color: white;
+           li{
+               p{
+               color: #000;
+               }
+           }
+       }
+       .barra-buscar{
+           background: #cb2624;
+       }
+   }
+}
+
+html.light{
+    main{
+    h2,p{
+        color: #000;
+    }
+        li{
+            border: 2px solid #cb2624;
+        }
+    .barra-buscar{
+        border: 2px solid #cb2624;
+        color: #cb2624;
+    }
+    }
+}
