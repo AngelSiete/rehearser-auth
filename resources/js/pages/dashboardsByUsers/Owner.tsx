@@ -2,8 +2,10 @@ import { usePage } from '@inertiajs/react';
 import { Link, router } from '@inertiajs/react';
 import { useMobileNavigation } from '@/hooks/use-mobile-navigation';
 import Index from '@/pages/locals';
+import BookingList from '@/pages/locals/bookings-list';
 import { logout } from '@/routes';
 
+import type { BookingType } from '@/types/bookings';
 type OwnerDashboardProps = {
     auth: {
         user: {
@@ -11,10 +13,11 @@ type OwnerDashboardProps = {
             email: string;
         };
     };
+    bookings: BookingType[];
 };
 import type { LocalType } from '@/types/local';
 
-const OwnerDashboard: React.FC<OwnerDashboardProps> = ({ auth }) => {
+const OwnerDashboard: React.FC<OwnerDashboardProps> = ({ auth,bookings }) => {
     const cleanup = useMobileNavigation();
 
     const handleLogout = () => {
@@ -33,7 +36,11 @@ const OwnerDashboard: React.FC<OwnerDashboardProps> = ({ auth }) => {
             </p>
             <div className="space-y-2"></div>
             <Index locals={locals} />
-            <Link href='/locals/create'>Sube un nuevo local</Link>
+            <Link href="/locals/create">Sube un nuevo local</Link>
+            <h2>Reservas en tus locales:</h2>
+            <div className="space-y-2">
+                <BookingList bookings={bookings} />
+            </div>
             <Link
                 className="block w-full cursor-pointer"
                 href={logout()}

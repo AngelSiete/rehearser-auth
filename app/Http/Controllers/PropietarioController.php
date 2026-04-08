@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
+use App\Models\Local;
 use App\Models\Propietario;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use App\Models\Local;
 
 class PropietarioController extends Controller
 {
@@ -19,13 +20,19 @@ class PropietarioController extends Controller
 
     public function dashboard()
     {
-        $locals = Local::where('user_id', auth()->id())
-            ->latest()->get();
+        $ownerId = auth()->id();
+        $locals = Local::where('user_id', $ownerId)->latest()->get();
+        $bookings = Booking::whereIn('local_id', $locals->pluck('id'))
+            ->with('local', 'user') //
+            ->orderBy('booking_date', 'asc')
+            ->get();
 
         return Inertia::render('dashboardsByUsers/Owner', [
             'locals' => $locals,
+            'bookings' => $bookings,
         ]);
     }
+
     /**
      * Show the form for creating a new resource.
      */
