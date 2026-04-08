@@ -45,7 +45,7 @@ class LocalPolicy
      */
     public function delete(User $user, Local $local): bool
     {
-        return false;
+        return $user->id === $local->user_id;
     }
 
     /**

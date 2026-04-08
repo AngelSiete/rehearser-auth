@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Local;
 use App\Models\Booking;
+use App\Models\Local;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class LocalController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-//        $locals = Local::latest()->get();
-//
-//        return Inertia::render('locals/index', ['locals' => $locals]);
+        //        $locals = Local::latest()->get();
+        //
+        //        return Inertia::render('locals/index', ['locals' => $locals]);
         $query = Local::query();
 
         // 🔍 Parámetros de búsqueda
@@ -34,7 +36,7 @@ class LocalController extends Controller
             $daysArray = is_array($days) ? $days : explode(',', $days);
             $query->where(function ($q) use ($daysArray) {
                 foreach ($daysArray as $day) {
-                    $q->whereJsonContains('available_weekdays', (int)$day);
+                    $q->whereJsonContains('available_weekdays', (int) $day);
                 }
             });
         }
@@ -46,7 +48,7 @@ class LocalController extends Controller
 
         return Inertia::render('locals/index', [
             'locals' => $locals,
-            'filters' => $request->only(['search','maxPrice','days']),
+            'filters' => $request->only(['search', 'maxPrice', 'days']),
         ]);
     }
 
@@ -103,6 +105,7 @@ class LocalController extends Controller
     {
         return $this->hasMany(Booking::class);
     }
+
     public function update(Request $request, Local $local)
     {
         $validated = $request->validate([
@@ -135,6 +138,8 @@ class LocalController extends Controller
      */
     public function destroy(Local $local)
     {
-        //
+        $this->authorize('delete', $local);
+        $local->delete();
+        return redirect()->route('locals.index')->with('success', 'Local eliminado correctamente.');
     }
 }

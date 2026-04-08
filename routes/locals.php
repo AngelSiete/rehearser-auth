@@ -17,6 +17,7 @@ Route::get('/locals/{local}/edit', [LocalController::class, 'edit'])
     ->name('locals.edit');
 
 Route::middleware('auth')->group(function () {
+    Route::delete('/locals/{local}', [LocalController::class, 'destroy'])->middleware('can:delete,local')->name('locals.destroy');
     Route::get('/locals/{local}/book', [BookingController::class, 'create'])->name('booking.create');
     Route::post('/locals/{local}/book', [BookingController::class, 'store'])->name('booking.store');
     Route::delete('/bookings/{booking}', [BookingController::class, 'destroy'])->name('booking.destroy');

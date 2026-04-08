@@ -1,4 +1,4 @@
-import { Link, usePage } from '@inertiajs/react';
+import { Link, router, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
 import BookingForm from '@/pages/locals/booking-form';
@@ -13,6 +13,16 @@ export default function Local({ local } : {local: LocalType}) {
     const translatedDays = local.available_weekdays
         ? translateDays(local.available_weekdays)
         : null;
+    const handleDelete = () => {
+        if (confirm('¿Estás seguro de que quieres eliminar este local?')) {
+            router.delete(`/locals/${local.id}`, {
+                preserveScroll: true,
+                onSuccess: () => {
+                    console.log('Local eliminado');
+                },
+            });
+        }
+    };
 
     return (
         <div className="local mx-auto w-full max-w-md rounded-2xl border border-gray-100 bg-white p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl dark:border-gray-800 dark:bg-gray-900">
@@ -74,7 +84,7 @@ export default function Local({ local } : {local: LocalType}) {
                     {translatedDays ? translatedDays.join(', ') : '—'}
                 </span>
             </div>
-            {auth?.user && isLocalPage &&!isOwner && (
+            {auth?.user && isLocalPage && !isOwner && (
                 <button
                     onClick={toggleBookingForm}
                     className="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
@@ -90,12 +100,20 @@ export default function Local({ local } : {local: LocalType}) {
                 />
             )}
             {isOwner && isLocalPage && (
-                <Link
-                    href={`/locals/${local.id}/edit`}
-                    className="btn-edit rounded-full bg-blue-800 px-3 py-1 text-white dark:bg-blue-600"
-                >
-                    Editar
-                </Link>
+                <>
+                    <Link
+                        href={`/locals/${local.id}/edit`}
+                        className="btn-edit rounded-full bg-blue-800 px-3 py-1 text-white dark:bg-blue-600"
+                    >
+                        Editar
+                    </Link>
+                    <button
+                        onClick={handleDelete}
+                        className="btn-edit rounded-full bg-red-600 px-3 py-1 text-white hover:bg-red-700"
+                    >
+                        Eliminar este local
+                    </button>
+                </>
             )}
         </div>
     );
