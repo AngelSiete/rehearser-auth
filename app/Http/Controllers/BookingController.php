@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Local;
 use Carbon\Carbon;
-use Illuminate\Database\QueryException;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class BookingController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
@@ -100,9 +102,7 @@ class BookingController extends Controller
      */
     public function destroy(Booking $booking)
     {
-        if ($booking->user_id !== auth()->id()) {
-            abort(403, 'No autorizado');
-        }
+        $this->authorize('delete', $booking);
 
         try {
             $booking->delete();
