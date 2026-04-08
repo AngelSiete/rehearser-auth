@@ -103,13 +103,13 @@ export default function Local({ local } : {local: LocalType}) {
                 <>
                     <Link
                         href={`/locals/${local.id}/edit`}
-                        className="btn-edit rounded-full bg-blue-800 px-3 py-1 text-white dark:bg-blue-600"
+                        className="btn-edit mt-2 rounded-full bg-blue-800 px-3 py-1 text-white dark:bg-blue-600"
                     >
                         Editar
                     </Link>
                     <button
                         onClick={handleDelete}
-                        className="btn-edit rounded-full bg-red-600 px-3 py-1 text-white hover:bg-red-700"
+                        className="btn-edit mt-2 ml-4 rounded-full bg-red-600 px-3 py-1 text-white hover:bg-red-700"
                     >
                         Eliminar este local
                     </button>
