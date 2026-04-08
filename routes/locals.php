@@ -19,6 +19,7 @@ Route::get('/locals/{local}/edit', [LocalController::class, 'edit'])
 Route::middleware('auth')->group(function () {
     Route::get('/locals/{local}/book', [BookingController::class, 'create'])->name('booking.create');
     Route::post('/locals/{local}/book', [BookingController::class, 'store'])->name('booking.store');
+    Route::delete('/bookings/{booking}', [BookingController::class, 'destroy'])->name('booking.destroy');
 });
 //Route::post('/locals/{local}/bookings', [BookingController::class, 'store'])->middleware(['auth', 'user'])->name('bookings.store');
 /* END PROTECTED ROUTES*/

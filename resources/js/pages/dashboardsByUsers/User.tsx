@@ -21,6 +21,17 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ auth, bookings }) => {
         router.flushAll();
     };
 
+    const cancelBooking = (id: number): void => {
+        if (confirm('¿Cancelar esta reserva?')) {
+            router.delete(`/bookings/${id}`, {
+                preserveScroll: true,
+                onSuccess: () => {
+                    console.log('Reserva cancelada');
+                },
+            });
+        }
+    };
+
     return (
         <div className="p-6">
             <h1 className="mb-4 text-2xl font-bold">
@@ -68,6 +79,13 @@ const UserDashboard: React.FC<UserDashboardProps> = ({ auth, bookings }) => {
                                 >
                                     Ver ficha del local →
                                 </Link>
+                                <button
+                                    onClick={() =>
+                                        cancelBooking(booking.id)
+                                    }
+                                >
+                                    Cancelar reserva
+                                </button>
                             </div>
                         </details>
                     </li>

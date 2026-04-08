@@ -100,6 +100,18 @@ class BookingController extends Controller
      */
     public function destroy(Booking $booking)
     {
-        //
+        if ($booking->user_id !== auth()->id()) {
+            abort(403, 'No autorizado');
+        }
+
+        try {
+            $booking->delete();
+
+            return redirect()->back()->with('success', 'Reserva cancelada correctamente.');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors([
+                'error' => 'No se pudo cancelar la reserva.',
+            ]);
+        }
     }
 }
