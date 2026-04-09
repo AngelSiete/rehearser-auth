@@ -75,7 +75,7 @@ export default function Local({ local } : {local: LocalType}) {
                             : 'bg-red-100 text-red-700'
                     }`}
                 >
-                    {local.hasEquipment ? 'Has Equipment' : 'No Equipment'}
+                    {local.hasEquipment ? 'Equipo propio' : 'Sin equipo'}
                 </span>
             </div>
             <div className="days mt-4 flex flex-col">
