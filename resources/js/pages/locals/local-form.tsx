@@ -13,13 +13,13 @@ export default function Create() {
     });
 
     const weekdays: Weekday[] = [
-        { label: 'Sunday', value: 0 },
-        { label: 'Monday', value: 1 },
-        { label: 'Tuesday', value: 2 },
-        { label: 'Wednesday', value: 3 },
-        { label: 'Thursday', value: 4 },
-        { label: 'Friday', value: 5 },
-        { label: 'Saturday', value: 6 },
+        { label: 'Domingo', value: 0 },
+        { label: 'Lunes', value: 1 },
+        { label: 'Martes', value: 2 },
+        { label: 'Miércoles', value: 3 },
+        { label: 'Jueves', value: 4 },
+        { label: 'Viernes', value: 5 },
+        { label: 'Sábado', value: 6 },
     ];
     function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
@@ -37,12 +37,15 @@ export default function Create() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form
+            onSubmit={handleSubmit}
+            className="m-auto w-min rounded-2xl border border-gray-100 bg-blue-50 p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl dark:border-gray-800 dark:bg-gray-900"
+        >
             {/* Name */}
             <div>
                 <input
                     type="text"
-                    placeholder="Name"
+                    placeholder="Nombre del local"
                     value={data.name}
                     onChange={(e) => setData('name', e.target.value)}
                 />
@@ -52,7 +55,7 @@ export default function Create() {
             {/* Description */}
             <div>
                 <textarea
-                    placeholder="Description"
+                    placeholder="Descripción"
                     value={data.description}
                     onChange={(e) => setData('description', e.target.value)}
                 />
@@ -63,7 +66,7 @@ export default function Create() {
             <div>
                 <input
                     type="number"
-                    placeholder="Hourly Rate"
+                    placeholder="Precio - Euros / hora"
                     value={data.hourlyRate}
                     onChange={(e) => setData('hourlyRate', e.target.value)}
                 />
@@ -74,7 +77,7 @@ export default function Create() {
             <div>
                 <input
                     type="text"
-                    placeholder="City"
+                    placeholder="Ciudad"
                     value={data.city}
                     onChange={(e) => setData('city', e.target.value)}
                 />
@@ -85,7 +88,7 @@ export default function Create() {
             <div>
                 <input
                     type="text"
-                    placeholder="Direction"
+                    placeholder="Dirección completa"
                     value={data.direction}
                     onChange={(e) => setData('direction', e.target.value)}
                 />
@@ -96,7 +99,7 @@ export default function Create() {
             <div>
                 <input
                     type="number"
-                    placeholder="Musician Capacity"
+                    placeholder="Núm. Músicos"
                     value={data.musicianCapacity}
                     onChange={(e) =>
                         setData('musicianCapacity', e.target.value)
@@ -106,7 +109,6 @@ export default function Create() {
                     <div>{errors.musicianCapacity}</div>
                 )}
             </div>
-
             {/* Has Equipment (checkbox) */}
             <div>
                 <label>
@@ -117,12 +119,12 @@ export default function Create() {
                             setData('hasEquipment', e.target.checked)
                         }
                     />
-                    Has Equipment
+                    Equipo propio
                 </label>
                 {errors.hasEquipment && <div>{errors.hasEquipment}</div>}
             </div>
             <div>
-                <p>Disponibilidad</p>
+                <p>Disponibilidad:</p>
                 {weekdays.map((day: Weekday) => (
                     <label key={day.value} style={{ display: 'block' }}>
                         <input
@@ -142,7 +144,7 @@ export default function Create() {
             </div>
 
             <button type="submit" disabled={processing}>
-                Create
+                Crear
             </button>
         </form>
     );
