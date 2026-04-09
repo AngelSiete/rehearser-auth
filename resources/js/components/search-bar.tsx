@@ -88,7 +88,6 @@ export default function SearchBar({
                 )}
             </div>
 
-            {/* 💰 Max price */}
             <input
                 type="number"
                 value={filters.maxPrice ?? ''}
@@ -98,7 +97,7 @@ export default function SearchBar({
                         maxPrice: Number(e.target.value) || undefined,
                     })
                 }
-                placeholder="Max Price €"
+                placeholder="€/hora"
                 className="w-full rounded border px-3 py-2 md:w-32"
             />
 

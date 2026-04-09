@@ -11,7 +11,7 @@ class Local extends Model
 
     protected $fillable = ['name', 'city', 'direction', 'musicianCapacity', 'hasEquipment', 'description', 'hourlyRate', 'available_weekdays'];
     protected $casts = [
-        'available_weekdays' => 'array', // ✅
+        'available_weekdays' => 'array',
         'hasEquipment' => 'boolean',
     ];
 
