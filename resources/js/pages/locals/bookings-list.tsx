@@ -50,7 +50,8 @@ const BookingList: React.FC<BookingProps> = ({bookings}) =>{
                             >
                                 Ver ficha del local →
                             </Link>
-                            <button onClick={() => cancelBooking(booking.id)}>
+                            <br/>
+                            <button onClick={() => cancelBooking(booking.id)} className="dark:text-black">
                                 Cancelar reserva
                             </button>
                         </div>
