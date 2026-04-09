@@ -143,7 +143,7 @@ export default function Create() {
                 )}
             </div>
 
-            <button type="submit" disabled={processing}>
+            <button type="submit" disabled={processing} className="dark:text-white">
                 Crear
             </button>
         </form>

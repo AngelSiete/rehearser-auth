@@ -28,7 +28,10 @@ export default function Edit({ local }: { local: LocalType }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form
+            onSubmit={handleSubmit}
+            className="m-auto w-min rounded-2xl border border-gray-100 bg-blue-50 p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl dark:border-gray-800 dark:bg-gray-900"
+        >
             {/* Name */}
             <div>
                 <input
@@ -109,7 +112,7 @@ export default function Edit({ local }: { local: LocalType }) {
                 {errors.hasEquipment && <div>{errors.hasEquipment}</div>}
             </div>
 
-            <button type="submit" disabled={processing}>
+            <button type="submit" disabled={processing} className="dark:text-white">
                 Actualizar
             </button>
         </form>
