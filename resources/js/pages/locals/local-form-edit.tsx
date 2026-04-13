@@ -117,7 +117,7 @@ export default function Edit({ local }: { local: LocalType }) {
                             setData('hasEquipment', e.target.checked)
                         }
                     />
-                    Has Equipment
+                    Equipo propio
                 </label>
                 {errors.hasEquipment && <div>{errors.hasEquipment}</div>}
             </div>

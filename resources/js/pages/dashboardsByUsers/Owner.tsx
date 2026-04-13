@@ -25,6 +25,7 @@ const OwnerDashboard: React.FC<OwnerDashboardProps> = ({ auth,bookings }) => {
         router.flushAll();
     };
     const { locals } = usePage<{ locals: LocalType[] }>().props;
+    const isBookingsEmpty:boolean = bookings.length > 0;
 
     return (
         <div className="p-6">
@@ -37,7 +38,7 @@ const OwnerDashboard: React.FC<OwnerDashboardProps> = ({ auth,bookings }) => {
             <div className="space-y-2"></div>
             <Index locals={locals} />
             <Link href="/locals/create">Sube un nuevo local</Link>
-            <h2>Reservas en tus locales:</h2>
+            {isBookingsEmpty && <h2>Reservas en tus locales:</h2>}
             <div className="space-y-2">
                 <BookingList bookings={bookings} />
             </div>
