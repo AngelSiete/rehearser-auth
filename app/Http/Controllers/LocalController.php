@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Local;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -86,7 +87,13 @@ class LocalController extends Controller
      */
     public function show(Local $local)
     {
+        $bookedDates = $local->bookings
+            ->map->booking_date
+            ->map->format('Y-m-d')
+            ->toArray();
+
         return Inertia::render('locals/local', ['local' => $local,
+            'bookedDates' => $bookedDates,
             'canEdit' => auth()->id() === $local->user_id, ]);
     }
 
@@ -101,10 +108,6 @@ class LocalController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function bookings()
-    {
-        return $this->hasMany(Booking::class);
-    }
 
     public function update(Request $request, Local $local)
     {

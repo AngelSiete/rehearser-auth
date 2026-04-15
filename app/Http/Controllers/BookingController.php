@@ -27,9 +27,12 @@ class BookingController extends Controller
     public function create(Local $local)
     {
 
-        $bookedDates = $local->bookings()->pluck('booking_date')->toArray();
+        $bookedDates = $local->bookings()
+            ->pluck('booking_date')
+            ->map(fn ($date) => Carbon::parse($date)->format('Y-m-d'))
+            ->toArray();
 
-        return Inertia::render('locals/booking', [
+        return Inertia::render('locals/booking-form', [
             'local' => $local,
             'bookedDates' => $bookedDates,
         ]);

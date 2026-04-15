@@ -1,6 +1,6 @@
 import { router, usePage } from '@inertiajs/react';
 import { useState } from 'react';
-import type { LocalType } from '@/types/local';
+import type { LocalType,DayNumber } from '@/types/local';
 
 type BookingFormProps = {
     local: LocalType;
@@ -15,10 +15,9 @@ export default function BookingForm({
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState<string | null>(null);
     const { auth } = usePage().props as any;
-
     const isDateDisabled = (d: string) => {
-        const day = new Date(d).getDay(); // 0 = Sunday, 6 = Saturday
-        const weekdayAvailable = local.available_weekdays.includes(day);
+        const day = new Date(d).getDay();
+        const weekdayAvailable = local.available_weekdays.includes(day as DayNumber);
         const alreadyBooked = bookedDates.includes(d);
 
         return !weekdayAvailable || alreadyBooked;

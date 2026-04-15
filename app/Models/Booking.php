@@ -13,6 +13,10 @@ class Booking extends Model
         'booking_date',
     ];
 
+    protected $casts = [
+        'booking_date' => 'date',
+    ];
+
     public function local()
     {
         return $this->belongsTo(Local::class);

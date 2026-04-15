@@ -26,7 +26,7 @@ class Local extends Model
     }
     public function bookings()
     {
-        return $this->hasMany(Booking::class);
+        return $this->hasMany(Booking::class, 'local_id');
     }
     // Relationship
     public function user()

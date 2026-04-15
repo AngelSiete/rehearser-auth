@@ -4,10 +4,16 @@ import { useState } from 'react';
 import BookingForm from '@/pages/locals/booking-form';
 import type { LocalType } from '@/types/local';
 import { translateDays } from '@/utils/days';
-export default function Local({ local } : {local: LocalType}) {
+export default function Local({
+    local,
+    bookedDates,
+}: {
+    local: LocalType;
+    bookedDates: string[],
+}) {
     const { auth } = usePage().props;
-    const isLocalPage : boolean = usePage().url.startsWith('/local/');
-    const isOwner : boolean = auth?.user?.id === local.user_id;
+    const isLocalPage: boolean = usePage().url.startsWith('/local/');
+    const isOwner: boolean = auth?.user?.id === local.user_id;
     const [showBookingForm, setShowBookingForm] = useState(false);
     const toggleBookingForm = () => setShowBookingForm((prev) => !prev);
     const translatedDays = local.available_weekdays
@@ -94,10 +100,7 @@ export default function Local({ local } : {local: LocalType}) {
             )}
 
             {showBookingForm && isLocalPage && (
-                <BookingForm
-                    local={local}
-                    bookedDates={local.booked_dates ?? []}
-                />
+                <BookingForm local={local} bookedDates={bookedDates ?? []} />
             )}
             {isOwner && isLocalPage && (
                 <>
