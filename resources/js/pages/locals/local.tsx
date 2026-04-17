@@ -32,41 +32,38 @@ export default function Local({
 
     return (
         <div className="local mx-auto w-full max-w-md rounded-2xl border border-gray-100 bg-blue-50 p-6 shadow-lg transition-shadow duration-300 hover:shadow-xl dark:border-gray-800 dark:bg-gray-900">
-            {/* Title */}
             <h2 className="mb-2 text-2xl font-bold text-gray-800 dark:text-white">
                 {local.name}
             </h2>
 
-            {/* Description */}
             <p className="descript mb-4 text-sm text-gray-600 dark:text-gray-300">
                 {local.description}
             </p>
 
-            {/* Info Grid */}
             <div className="grid grid-cols-2 gap-4 text-sm">
                 <div className="flex flex-col">
-                    <span className="text-gray-400">Hourly Rate</span>
+                    <span className="text-gray-400">Precio/hora</span>
                     <span className="font-semibold text-gray-800 dark:text-white">
                         {local.hourlyRate} €/h
                     </span>
                 </div>
 
                 <div className="flex flex-col">
-                    <span className="text-gray-400">City</span>
+                    <span className="text-gray-400">Ciudad</span>
                     <span className="font-semibold text-gray-800 dark:text-white">
                         {local.city || '—'}
                     </span>
                 </div>
 
                 <div className="direction flex flex-col">
-                    <span className="text-gray-400">Direction</span>
+                    <span className="text-gray-400">Dirección</span>
                     <span className="font-semibold text-gray-800 dark:text-white">
                         {local.direction || '—'}
                     </span>
                 </div>
 
                 <div className="flex flex-col">
-                    <span className="text-gray-400">Capacity</span>
+                    <span className="text-gray-400">Capacidad</span>
                     <span className="font-semibold text-gray-800 dark:text-white">
                         {local.musicianCapacity ?? '—'}
                     </span>

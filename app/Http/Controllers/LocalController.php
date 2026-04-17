@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Booking;
 use App\Models\Local;
-use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -12,6 +10,7 @@ use Inertia\Inertia;
 class LocalController extends Controller
 {
     use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
@@ -108,7 +107,6 @@ class LocalController extends Controller
     /**
      * Update the specified resource in storage.
      */
-
     public function update(Request $request, Local $local)
     {
         $validated = $request->validate([
@@ -143,6 +141,7 @@ class LocalController extends Controller
     {
         $this->authorize('delete', $local);
         $local->delete();
+
         return redirect()->route('locals.index')->with('success', 'Local eliminado correctamente.');
     }
 }
