@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\LocalController;
+use Illuminate\Support\Facades\Route;
 
 Route::resource('locals', LocalController::class);
 
